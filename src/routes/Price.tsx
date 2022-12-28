@@ -91,7 +91,7 @@ function Price() {
   return (
     <div>
       {isLoading ? (
-        "Loading chart..."
+        "Loading price info..."
       ) : (
         <Container>
           <PriceBoxTitle>Latest</PriceBoxTitle>

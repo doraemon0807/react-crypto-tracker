@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import {
   useLocation,
@@ -8,7 +7,6 @@ import {
   useMatch,
 } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 
@@ -154,8 +152,8 @@ const Tab = styled.div<{ isActive: boolean }>`
 function Coin() {
   const { coinId } = useParams();
   const { state } = useLocation();
-  const priceMatch = useMatch("/:coinId/price");
-  const chartMatch = useMatch("/:coinId/chart");
+  const priceMatch = useMatch(`${process.env.PUBLIC_URL}/:coinId/price`);
+  const chartMatch = useMatch(`${process.env.PUBLIC_URL}/:coinId/chart`);
 
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ["info", coinId],
@@ -184,7 +182,7 @@ function Coin() {
       </Helmet>
       <Header>
         <Return>
-          <Link to="/">&larr; Home</Link>
+          <Link to={`${process.env.PUBLIC_URL}`}>&larr; Home</Link>
         </Return>
         <Title>
           {state

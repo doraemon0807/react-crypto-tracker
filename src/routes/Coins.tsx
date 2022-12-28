@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import axios from "axios";
 import { fetchCoins } from "../api";
 import { Helmet } from "react-helmet";
 
@@ -83,7 +81,7 @@ function Coins() {
           {data?.slice(0, 100).map((coin) => (
             <Coin key={coin.id}>
               <Link
-                to={`/${coin.id}/price`}
+                to={`${coin.id}/price`}
                 state={{ name: coin.name, symbol: coin.symbol }}
               >
                 <Img

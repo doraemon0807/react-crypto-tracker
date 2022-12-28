@@ -28,8 +28,6 @@ function Chart() {
     }
   );
 
-  interface IohlcvData {}
-
   return (
     <div>
       {isLoading ? (
