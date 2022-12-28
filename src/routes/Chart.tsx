@@ -33,7 +33,7 @@ function Chart() {
   return (
     <div>
       {isLoading ? (
-        "Loading chart..."
+        "Loading chart...."
       ) : (
         <ApexChart
           series={
