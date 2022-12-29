@@ -29,11 +29,11 @@ const PriceBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: white;
-  color: black;
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
+  border: 1px solid ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.boxColor};
 `;
 
 const PriceBoxGrid = styled.div`

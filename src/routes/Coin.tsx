@@ -9,6 +9,7 @@ import {
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
+import { URL } from "../Router";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -28,16 +29,6 @@ const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
 `;
 
-const Return = styled.span`
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  a {
-    &:hover {
-      color: ${(props) => props.theme.accentColor};
-    }
-  }
-`;
 const Loader = styled.span`
   text-align: center;
   display: block;
@@ -99,14 +90,14 @@ interface TickersData {
 }
 
 const Overview = styled.div`
-  background-color: white;
-  color: ${(props) => props.theme.bgColor};
   border-radius: 10px;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  border: 1px solid ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.boxColor};
 `;
 
 const InfoDiv = styled.div`
@@ -141,7 +132,7 @@ const Tab = styled.div<{ isActive: boolean }>`
   font-weight: 400;
   text-transform: uppercase;
   background-color: ${(props) =>
-    props.isActive ? props.theme.accentColor : props.theme.textColor};
+    props.isActive ? props.theme.accentColor : props.theme.boxColor};
   a {
     display: flex;
     padding: 10px;
@@ -152,8 +143,8 @@ const Tab = styled.div<{ isActive: boolean }>`
 function Coin() {
   const { coinId } = useParams();
   const { state } = useLocation();
-  const priceMatch = useMatch(`${process.env.PUBLIC_URL}/:coinId/price`);
-  const chartMatch = useMatch(`${process.env.PUBLIC_URL}/:coinId/chart`);
+  const priceMatch = useMatch(`${URL}/:coinId/price`);
+  const chartMatch = useMatch(`${URL}/:coinId/chart`);
 
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ["info", coinId],
@@ -181,9 +172,6 @@ function Coin() {
         </title>
       </Helmet>
       <Header>
-        <Return>
-          <Link to={`${process.env.PUBLIC_URL}`}>&larr; Home</Link>
-        </Return>
         <Title>
           {state
             ? `${state.name} (${state.symbol})`
