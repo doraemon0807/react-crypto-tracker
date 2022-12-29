@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { isDarkAtom } from "../atoms";
 
@@ -16,7 +16,24 @@ const Return = styled.span`
   }
 `;
 
+const Button = styled.button`
+  all: unset;
+  cursor: pointer;
+`;
+
+const Img = styled.img`
+  width: 35px;
+  height: 35px;
+  border: 1px solid rgba(255, 255, 255, 0);
+  margin-right: 5px;
+  padding: 3px;
+  &:hover {
+    border: 1px solid ${(props) => props.theme.accentColor};
+  }
+`;
+
 function Header() {
+  const isDark = useRecoilValue(isDarkAtom);
   const setDarkAtom = useSetRecoilState(isDarkAtom);
   const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
 
@@ -24,9 +41,17 @@ function Header() {
     <>
       <Return>
         <Link to={`${URL}`}>
-          <img src="/../../public/home.png" />
+          <Img src={`${process.env.PUBLIC_URL}/home.png`} />
         </Link>
-        <button onClick={toggleDarkAtom}>Toggle Mode</button>
+        <Button onClick={toggleDarkAtom}>
+          <Img
+            src={
+              isDark
+                ? `${process.env.PUBLIC_URL}/light.png`
+                : `${process.env.PUBLIC_URL}/dark.png`
+            }
+          />
+        </Button>
       </Return>
     </>
   );
